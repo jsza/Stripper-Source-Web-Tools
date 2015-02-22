@@ -1,0 +1,19 @@
+{
+  "name": "stripper_source-tools",
+  "version": "0.0.0",
+  "main": "src/index.cjsx",
+  "devDependencies": {
+    "browserify": "^6.1.0",
+    "browserify-shim": "^3.8.0",
+    "coffee-reactify": "^2.4.1",
+    "watchify": "^2.3.0"
+  },
+  "scripts": {
+    "start": "watchify . -o static/js/bundle.js -t coffee-reactify -v --extension=\".cjsx\" --extension=\".coffee\""
+  },
+  "dependencies": {
+    "codemirror": "^5.0.0",
+    "react": "^0.12.2",
+    "underscore": "^1.8.1"
+  }
+}
