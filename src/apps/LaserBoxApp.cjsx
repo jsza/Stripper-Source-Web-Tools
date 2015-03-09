@@ -1,9 +1,8 @@
 React = require('react')
 LinkedStateMixin = require('react/lib/LinkedStateMixin')
-CoolInput = require('./CoolInput')
+CoolInput = require('../components/CoolInput')
 CodeMirror = require('codemirror')
-Box = require('./Box')
-
+Box = require('../utils/laser/Box')
 
 
 
@@ -52,7 +51,7 @@ LaserBoxApp = React.createClass
 
     render: ->
         <div>
-            <h3>Laser Box</h3>
+            <h3>Box</h3>
             <div className="row">
                 <div className="col-lg-4">
                     <CoolInput title="Identifier" placeholder="unique identifier"
