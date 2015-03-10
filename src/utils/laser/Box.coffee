@@ -15,7 +15,6 @@ mapToVector = (s) ->
 
 
 makeBeam = (targetname, start, end, width, color, texture) ->
-    console.log targetname
     return {
         'classname': 'env_beam'
         'targetname': targetname

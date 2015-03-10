@@ -6,7 +6,6 @@
     "browserify": "^6.1.0",
     "browserify-shim": "^3.8.0",
     "coffee-reactify": "^2.4.1",
-    "ctype": "^0.5.4",
     "watchify": "^2.3.0"
   },
   "scripts": {
@@ -14,11 +13,12 @@
   },
   "dependencies": {
     "codemirror": "^5.0.0",
-    "jbinary": "^2.1.2",
+    "es6-promise": "^2.0.1",
     "react": "^0.12.2",
     "react-bootstrap": "^0.16.1",
     "react-router": "^0.12.4",
     "react-router-bootstrap": "^0.9.1",
-    "underscore": "^1.8.1"
+    "reflux": "^0.2.6",
+    "underscore": "^1.8.2"
   }
 }

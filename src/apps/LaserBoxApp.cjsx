@@ -27,7 +27,6 @@ LaserBoxApp = React.createClass
 
 
     getCode: ->
-        console.log @state.width
         box = new Box(@state.identifier, @state.origin, @state.size, @state.width,
                   @state.color, @state.texture)
         return box.renderStripperCode()
