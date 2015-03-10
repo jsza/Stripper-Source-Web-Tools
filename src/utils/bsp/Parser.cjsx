@@ -46,6 +46,15 @@ parseEntity = (buf, pos) ->
 
 
 
+getEntityOutputs = (entity) ->
+    result = {}
+    for k, v of entity
+        if /^.*,.*,.*,.*,.*$/g.test(v)
+            result[k] = v
+    return result
+
+
+
 parseEntities = (entityString) ->
     pos = 0
     entities = []
@@ -55,7 +64,10 @@ parseEntities = (entityString) ->
             break
         [entity, pos] = thing
 
-        entities.push(entity)
+        entities.push({
+            kv: entity
+            outputs: getEntityOutputs(entity)
+        })
     return entities
 
 

@@ -14,7 +14,7 @@ EntityList = React.createClass
             f = @props.kvFilter
             entities = @props.entities.filter(
                 (entity) ->
-                    return entity[f.key] == f.value
+                    return entity.kv[f.key] == f.value
             )
         else
             entities = @props.entities
@@ -24,7 +24,7 @@ EntityList = React.createClass
                 'active': entity == @props.selectedEntity
             })
             <li className={classes} onClick={@onClickItem.bind(this, entity)}>
-                {entity.classname}
+                {entity.kv.classname}
             </li>
         )
         <ul className="bsp-entity-list">

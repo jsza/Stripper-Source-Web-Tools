@@ -18,7 +18,9 @@ ClassnameList = React.createClass
                 if f.key == 'classname' and item[0] == f.value
                     active = true
             return (
-                <ListGroupItem onClick={@onClickItem.bind(this, cn)} active={active} key={cn} style={padding: '6px 12px', fontSize: '13px'} href="#">
+                <ListGroupItem
+                        onClick={@onClickItem.bind(this, cn)} active={active}
+                        key={cn} style={padding: '6px 12px', fontSize: '13px'} href="#">
                     <strong>{cn}</strong>
                     <span className="pull-right">{cnt}</span>
                 </ListGroupItem>

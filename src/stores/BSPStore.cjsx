@@ -39,7 +39,7 @@ BSPStore = Reflux.createStore
     countClassnames: ->
         thing = {}
         for entity in @entities
-            cn = entity.classname
+            cn = entity.kv.classname
             if not thing[cn]
                 thing[cn] = 0
             thing[cn]++
@@ -53,9 +53,9 @@ BSPStore = Reflux.createStore
             .then(
                 (entities) =>
                     entities.sort((a, b) ->
-                        if a.classname > b.classname
+                        if a.kv.classname > b.kv.classname
                             return 1
-                        if a.classname < b.classname
+                        if a.kv.classname < b.kv.classname
                             return -1
                         return 0
                     )
