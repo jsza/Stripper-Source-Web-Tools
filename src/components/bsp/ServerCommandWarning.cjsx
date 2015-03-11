@@ -16,9 +16,9 @@ ServerCommandWarning = React.createClass
                 if cn == 'point_servercommand'
                     return (
                         <pre className="no-margin" style={marginTop: '10px'}>
-                            <div className="text-warning">
+                            <span className="text-warning">
                                 WARNING: One or more <a href="#" onClick={@onClick}>point_servercommand</a> detected. Be sure to check their inputs.
-                            </div>
+                            </span>
                         </pre>
                     )
         return null

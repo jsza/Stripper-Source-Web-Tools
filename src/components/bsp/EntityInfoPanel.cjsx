@@ -15,13 +15,14 @@ EntityInfoPanel = React.createClass
             kv = @props.selectedEntity.kv
             title = kv.classname
             if kv.targetname
-                subtitle = ' ' + kv.targetname
+                subtitle = ' - ' + kv.targetname
             return (
                 <div className="bsp-info-container">
                     <div className="well" style={marginBottom: '10px', padding: '15px'}>
                         <h4 className="no-margin">
                             {title}
-                            <span className="text-muted pull-right" style={fontWeight: 'normal'}>{subtitle}</span>
+                            <span className="text-muted " style={fontWeight: 'normal'}>{subtitle}</span>
+                            <span className="pull-right"><i className="fa fa-star-o" /></span>
                         </h4>
                     </div>
                     <TabbedArea animation={false} style={flex: '1 1 200px'}>

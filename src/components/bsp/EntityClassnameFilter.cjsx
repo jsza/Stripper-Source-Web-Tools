@@ -23,7 +23,7 @@ EntityClassnameFilter = React.createClass
     renderOptions: ->
         return @props.classnameTally.map((item) ->
             [cn, cnt] = item
-            return <option value={cn}>{cn} ({cnt})</option>
+            return <option value={cn}>{cn + ' (' + cnt + ')'}</option>
         )
 
 
