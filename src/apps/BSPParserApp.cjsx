@@ -11,6 +11,7 @@ EntityInfoPanel = require('../components/bsp/EntityInfoPanel')
 BSPDropzone = require('../components/bsp/BSPDropzone')
 BSPHeading = require('../components/bsp/BSPHeading')
 BSPErrorPanel = require('../components/bsp/BSPErrorPanel')
+ServerCommandWarning = require('../components/bsp/ServerCommandWarning')
 
 
 
@@ -18,31 +19,25 @@ BSPParserApp = React.createClass
     mixins: [Reflux.connect(BSPStore)]
 
     render: ->
-        console.log @state.loading
-        if @state.loading
+        # if @state.loading
+        #     content = (
+        #         'Loading...'
+        #     )
+        if @state.fileName
+                # <ClassnameList {...@state} />
             content = (
-                'Loading...'
-            )
-        else if @state.fileName
-            content = (
-                <Row>
-                    <Col lg={2}>
-                        <ClassnameList {...@state} />
-                    </Col>
-                    <Col lg={2}>
-                        <EntityList {...@state} />
-                    </Col>
-                    <Col lg={4}>
-                        <EntityInfoPanel {...@state} />
-                    </Col>
-                </Row>
+                <BSPDropzone className="bsp-inner-container" noStyle>
+                    <EntityList {...@state} />
+                    <EntityInfoPanel {...@state} />
+                </BSPDropzone>
             )
         else
-            content = <BSPDropzone />
-        <div>
+            content = <BSPDropzone className="bsp-inner-container" />
+        <div className="inherit-height bsp-app-container">
             <BSPErrorPanel />
             <BSPHeading fileName={@state.fileName} />
             {content}
+            <ServerCommandWarning classnameTally={@state.classnameTally} />
         </div>
 
 

@@ -12,4 +12,11 @@ BSPActions = Reflux.createActions([
 
 
 
-module.exports = {BSPActions}
+EntityFilterActions = Reflux.createActions([
+    'setClassnameFilter' # called by EntityClassnameFilter
+    'setTextFilter'      # called by EntitySearch
+])
+
+
+
+module.exports = {BSPActions, EntityFilterActions}

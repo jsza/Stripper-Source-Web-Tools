@@ -33,6 +33,10 @@ BSPDropzone = React.createClass
         else if e.target
             files = e.target.files
 
+        # if files is empty, the user dropped something else into the page
+        if not files.length
+            return
+
         @handleFiles(files)
 
         @setState({
@@ -50,17 +54,24 @@ BSPDropzone = React.createClass
 
     render: ->
         dropzoneClasses = cx({
-            'bsp-dropzone': true
+            'bsp-dropzone': not @props.noStyle
             'active': @state.dragActive
         })
-        <div>
+        if @props.noStyle
+            return (
+                <div className={@props.className + ' ' + dropzoneClasses} onDragLeave={@onDragLeave}
+                     onDragOver={@onDragOver} onDrop={@onDrop}>
+                    {@props.children}
+                </div>
+             )
+        return (
             <div className={dropzoneClasses} onDragLeave={@onDragLeave}
                  onDragOver={@onDragOver} onDrop={@onDrop} onClick={@onClick}>
                 <span className="bsp-dropzone-text">Drag file here or click</span>
+                <input style={display: 'none'} type="file" multiple
+                       ref="fileInput" onChange={this.onDrop} />
             </div>
-            <input style={display: 'none'} type="file" multiple
-                   ref="fileInput" onChange={this.onDrop} />
-        </div>
+        )
 
 
 

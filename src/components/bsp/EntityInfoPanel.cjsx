@@ -2,102 +2,45 @@ React = require('react')
 {TabbedArea, TabPane, Table} = require('react-bootstrap')
 _ = require('underscore')
 
-
-
-objectToStripper = (object) ->
-    result = ''
-    _.keys(object).sort().forEach(
-        (key) ->
-            result += '    "' + key + '" "' + object[key] + '"\n'
-    )
-    return '{\n' + result + '}'
+EntityPropertiesPanel = require('./EntityPropertiesPanel')
+EntityInputsPanel = require('./EntityInputsPanel')
+EntityOutputsPanel = require('./EntityOutputsPanel')
+EntityRawPanel = require('./EntityRawPanel')
 
 
 
 EntityInfoPanel = React.createClass
-    renderKeyValues: ->
-        keys = _.keys(@props.selectedEntity.kv).sort()
-
-        return keys.map((k) =>
-            if @props.selectedEntity.outputs[k] != undefined or k == 'classname'
-                return
-            v = @props.selectedEntity.kv[k]
-            <tr>
-                <th>{k}</th>
-                <td>{v}</td>
-            </tr>
-        )
-
-
-    renderOutputs: ->
-        keys = _.keys(@props.selectedEntity.outputs)
-
-        return keys.map((k) =>
-            v = @props.selectedEntity.outputs[k]
-
-            things = v.split(',').map((x) ->
-                <td>{x}</td>
-            )
-
-            <tr>
-                <th>{k}</th>
-                {things}
-            </tr>
-        )
-
-
     render: ->
         if @props.selectedEntity
+            kv = @props.selectedEntity.kv
+            title = kv.classname
+            if kv.targetname
+                subtitle = ' ' + kv.targetname
             return (
-                <div>
-                    <h4 className="no-margin" style={textDecoration: 'underline', marginBottom: '5px'}>{@props.selectedEntity.kv.classname}</h4>
-                    <TabbedArea animation={false}>
+                <div className="bsp-info-container">
+                    <div className="well" style={marginBottom: '10px', padding: '15px'}>
+                        <h4 className="no-margin">
+                            {title}
+                            <span className="text-muted pull-right" style={fontWeight: 'normal'}>{subtitle}</span>
+                        </h4>
+                    </div>
+                    <TabbedArea animation={false} style={flex: '1 1 200px'}>
                         <TabPane eventKey={1} tab="Properties" disabled>
-                            <div className="panel panel-default entity-info-panel">
-                                <div className="panel-body">
-                                    <Table bordered condensed hover style={marginBottom: 0}>
-                                        <tbody>{@renderKeyValues()}</tbody>
-                                    </Table>
-                                </div>
-                            </div>
+                            <EntityPropertiesPanel entity={@props.selectedEntity} />
                         </TabPane>
                         <TabPane eventKey={2} tab="Inputs">
-                            <div className="panel panel-default entity-info-panel">
-                                <div className="panel-body">
-                                    Not implemented yet
-                                </div>
-                            </div>
+                            <EntityInputsPanel entity={@props.selectedEntity} entities={@props.entities} />
                         </TabPane>
-                        <TabPane eventKey={3} tab="Outputs">
-                            <div className="panel panel-default entity-info-panel">
-                                <div className="panel-body">
-                                    <Table bordered condensed hover style={marginBottom: 0}>
-                                        <thead>
-                                            <th>Name</th>
-                                            <th>Target</th>
-                                            <th>Input</th>
-                                            <th>Parameters</th>
-                                            <th>Delay</th>
-                                            <th>Only once</th>
-                                        </thead>
-                                        <tbody>{@renderOutputs()}</tbody>
-                                    </Table>
-                                </div>
-                            </div>
+                        <TabPane eventKey={3} tab={'Outputs' + ' (' + @props.selectedEntity.outputs.length + ')'}>
+                            <EntityOutputsPanel entity={@props.selectedEntity} />
                         </TabPane>
                         <TabPane eventKey={4} tab="Raw">
-                            <div className="panel panel-default entity-info-panel">
-                                <div className="panel-body">
-                                    <pre style={marginBottom: 0}>
-                                        {objectToStripper(@props.selectedEntity.kv)}
-                                    </pre>
-                                </div>
-                            </div>
+                            <EntityRawPanel entity={@props.selectedEntity} />
                         </TabPane>
                     </TabbedArea>
                 </div>
             )
-        return <div />
+        return <div className="bsp-info-container" />
 
 
 

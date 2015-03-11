@@ -47,10 +47,19 @@ parseEntity = (buf, pos) ->
 
 
 getEntityOutputs = (entity) ->
-    result = {}
+    result = []
     for k, v of entity
         if /^.*,.*,.*,.*,.*$/g.test(v)
-            result[k] = v
+            foo = v.split(',')
+            [target, input, parameters, delay, onlyOnce] = v.split(',')
+            result.push({
+                trigger: k
+                target: target
+                input: input
+                parameters: parameters
+                delay: delay
+                onlyOnce: onlyOnce
+            })
     return result
 
 
@@ -64,10 +73,13 @@ parseEntities = (entityString) ->
             break
         [entity, pos] = thing
 
+        outputs = getEntityOutputs(entity)
+
         entities.push({
             kv: entity
             outputs: getEntityOutputs(entity)
         })
+    entities.m
     return entities
 
 

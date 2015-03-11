@@ -29,7 +29,11 @@ ClassnameList = React.createClass
 
 
     render: ->
-        <ListGroup>{@renderItems()}</ListGroup>
+        <div className="bsp-classlist-container">
+            <div className="bsp-classname-list list-group">
+                {@renderItems()}
+            </div>
+        </div>
 
 
 

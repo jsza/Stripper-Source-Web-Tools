@@ -7,7 +7,7 @@ BSPHeading = React.createClass
         if @props.fileName
             subHeading = (
                 <small>
-                    {@props.fileName} <a href="#"><i className="fa fa-remove" /> unload</a>
+                    {@props.fileName} <a href="#">unload</a>
                 </small>
             )
         else
