@@ -22,11 +22,13 @@ InputsPanel = React.createClass
 
 
     render: ->
-        <Panel className="entity-info-panel">
-            <Table bordered condensed hover style={marginBottom: 0}>
-                <tbody>{@renderKeyValues()}</tbody>
-            </Table>
-        </Panel>
+        <div className="panel panel-default entity-info-panel">
+            <div className="panel-body entity-info-panel-body">
+                <Table bordered condensed hover >
+                    <tbody>{@renderKeyValues()}</tbody>
+                </Table>
+            </div>
+        </div>
 
 
 

@@ -14,14 +14,12 @@ BSPStore = Reflux.createStore
         @entities = null
         @classnameTally = null
         @selectedEntity = null
-        @kvFilter = null
         return {
             loading: @loading
             fileName: @fileName
             entities: @entities
             classnameTally: @classnameTally
             selectedEntity: @selectedEntity
-            kvFilter: @kvFilter
         }
 
 
@@ -32,7 +30,6 @@ BSPStore = Reflux.createStore
             entities: @entities
             classnameTally: @classnameTally
             selectedEntity: @selectedEntity
-            kvFilter: @kvFilter
         })
 
 
@@ -46,7 +43,16 @@ BSPStore = Reflux.createStore
         @classnameTally = _.pairs(thing).sort()
 
 
+    onFlushStore: ->
+        @fileName = null
+        @entities = null
+        @classnameTally = null
+        @selectedEntity = null
+        @triggerUpdate()
+
+
     onLoadBSP: (file) ->
+        BSPActions.flushStore()
         @loading = true
         @triggerUpdate()
         readEntities(file)

@@ -11,6 +11,7 @@ App = React.createClass
             <Navbar brand="Stripper:Source Tools" inverse fixedTop fluid toggleNavKey={0}>
                 <Nav eventKey={0}>
                     <NavItemLink to="bsp">BSP Info</NavItemLink>
+                    <NavItemLink to="servercommand">BSP Servercommand</NavItemLink>
                     <NavItemLink to="laser">Laser Shapes</NavItemLink>
                 </Nav>
             </Navbar>

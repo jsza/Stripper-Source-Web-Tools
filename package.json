@@ -11,6 +11,8 @@
   "scripts": {
     "start": "npm run build-js",
     "watch": "npm run watch-js",
+    "//": "Pipe through jsx binary to apply displayName transform",
+    "//": "https://github.com/jsdf/coffee-react/issues/11",
     "build-js": "browserify src/index.cjsx -t coffee-reactify --extension=.cjsx --extension=.coffee | jsx | uglifyjs > bundle.js",
     "watch-js": "watchify . -o bundle.js -t coffee-reactify -v --extension=.cjsx --extension=.coffee"
   },

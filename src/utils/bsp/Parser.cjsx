@@ -21,7 +21,7 @@ parseEntity = (buf, pos) ->
             when '"'
                 if not section
                     console.log('String in unopened section')
-                    return
+                    return null
 
                 if string
                     if key == null
@@ -43,6 +43,20 @@ parseEntity = (buf, pos) ->
                     strBuf = strBuf.concat(c)
 
     return null
+
+
+
+getEntityInputs = (entity, entities) ->
+    inputs = []
+    if entity.kv.targetname
+        for e in entities
+            e.outputs.forEach((output) =>
+                if output.target == entity.kv.targetname
+                    inputs.push({e: e, o: output})
+                if output.target.toLowerCase().trim() == entity.kv.classname
+                    console.log output
+            )
+    return inputs
 
 
 
@@ -79,8 +93,13 @@ parseEntities = (entityString) ->
             kv: entity
             outputs: getEntityOutputs(entity)
         })
-    entities.m
-    return entities
+    return entities.map((e) ->
+        return {
+            kv: e.kv
+            outputs: e.outputs
+            inputs: getEntityInputs(e, entities)
+        }
+    )
 
 
 
@@ -166,4 +185,4 @@ readEntities = (file) ->
 
 
 
-module.exports = {readEntities}
+module.exports = {readEntities, getEntityInputs}

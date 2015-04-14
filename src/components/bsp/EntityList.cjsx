@@ -41,9 +41,17 @@ EntityList = React.createClass
             classes = cx({
                 'active': entity == @props.selectedEntity
             })
+            symbols = []
+            if entity.inputs.length
+                symbols.push('I')
+            if entity.outputs.length
+                symbols.push('O')
+            icons = symbols.join(' + ')
             <li className={classes} onClick={@onClickItem.bind(this, entity)}>
                 {entity.kv.classname}
-                {if entity.outputs.length then <i className="fa fa-toggle-right bsp-entity-list-icon" />}
+                <span className="pull-right">
+                    {icons}
+                </span>
             </li>
         )
 
@@ -66,3 +74,5 @@ EntityList = React.createClass
 
 
 module.exports = EntityList
+#{if entity.inputs.length then <i className="fa fa-toggle-left bsp-entity-list-icon" />}
+#{if entity.outputs.length then <i className="fa fa-toggle-right bsp-entity-list-icon" />}

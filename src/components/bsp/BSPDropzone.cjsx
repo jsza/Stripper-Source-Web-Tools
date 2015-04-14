@@ -49,7 +49,7 @@ BSPDropzone = React.createClass
 
 
     handleFiles: (files) ->
-        BSPActions.loadBSP(files[0])
+        @props.handleFiles(files)
 
 
     render: ->

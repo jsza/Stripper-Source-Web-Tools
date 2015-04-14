@@ -72,9 +72,18 @@ html, body {
 }
 
 .entity-info-panel {
+    overflow: auto;
     border-top: 0;
     border-top-left-radius: 0;
     border-top-right-radius: 0;
+    flex: 1 1 100px;
+    flex-flow: column nowrap;
+    margin-bottom: 0;
+}
+
+.entity-info-panel-body {
+    flex: 1 1 100px;
+    padding-bottom: 15px;
 }
 
 .no-margin {
@@ -117,6 +126,12 @@ html, body {
     margin-right: 10px;
 }
 
+.bsp-starredlist-container {
+    display: flex;
+    flex: 0 1 300px;
+    margin-left: 10px;
+}
+
 .bsp-info-container {
     display: flex;
     width: 100%;
@@ -125,6 +140,7 @@ html, body {
 }
 
 .bsp-dropzone {
+    min-height: 400px;
     display: flex;
     flex: 1 0 400px;
     justify-content: center;

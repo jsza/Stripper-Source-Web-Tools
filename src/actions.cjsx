@@ -8,6 +8,7 @@ BSPActions = Reflux.createActions([
     'setKeyValueFilter'
     'error'
     'dismissError'
+    'flushStore'
 ])
 
 

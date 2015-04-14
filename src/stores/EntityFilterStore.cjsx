@@ -1,11 +1,11 @@
 Reflux = require('reflux')
 
-{EntityFilterActions} = require('../actions')
+{EntityFilterActions, BSPActions} = require('../actions')
 
 
 
 EntityFilterStore = Reflux.createStore
-    listenables: [EntityFilterActions]
+    listenables: [EntityFilterActions, BSPActions]
 
     getInitialState: ->
         @classnameFilter = null
@@ -21,6 +21,12 @@ EntityFilterStore = Reflux.createStore
             text: @textFilter
             classname: @classnameFilter
         })
+
+
+    onFlushStore: ->
+        @classnameFilter = null
+        @textFilter = null
+        @triggerUpdate()
 
 
     onSetClassnameFilter: (classname) ->

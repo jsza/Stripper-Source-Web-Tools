@@ -1,13 +1,19 @@
 React = require('react')
+{BSPActions} = require('../../actions')
 
 
 
 BSPHeading = React.createClass
+    onClickUnload: (e) ->
+        e.preventDefault()
+        BSPActions.flushStore()
+
+
     render: ->
         if @props.fileName
             subHeading = (
                 <small>
-                    {@props.fileName} <a href="#">unload</a>
+                    {@props.fileName} <a href="#" onClick={@onClickUnload}>unload</a>
                 </small>
             )
         else
