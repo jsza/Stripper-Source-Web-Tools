@@ -71,7 +71,7 @@ modify:
 {
     match:
     {
-        "classname" "info_target"
+        "classname" "/info_target|info_teleport_destination/"
         "targetname" "${destName}"
     }
     replace:

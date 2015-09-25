@@ -119,7 +119,6 @@ function parseEntities(entityString) {
 
 
 function loadBSPHeader(file, callback) {
-  console.log(file)
   const typeSet =
     { 'jBinary.littleEndian': true
     , dheader_t:
