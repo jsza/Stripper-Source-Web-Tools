@@ -12,7 +12,7 @@ function findEntities(entities, targetname, notClasses) {
   for (let entity of entities) {
     const kv = entity.kv
     if (!notClasses.has(kv.classname)) {
-      if ((kv.targetname !== undefined ? kv.targetname.toLowerCase() : null) === targetname.toLowerCase()) {
+      if ((kv.targetname !== undefined ? kv.targetname.toLowerCase().trim() : null) === targetname.toLowerCase().trim()) {
         result.push(entity)
       }
     }
@@ -50,7 +50,7 @@ export default class CSGOFixesApp extends React.Component {
     for (var i = 0; i < files.length; i++) {
       const file = files[i]
       ds.push(readEntities(file)
-        .then(foo(file))
+        .then(foo(file)).catch(() => null)
       )
     }
     Promise.all(ds).then(() => this.setState({maps: maps}))
@@ -61,7 +61,7 @@ export default class CSGOFixesApp extends React.Component {
     for (let k in this.state.maps) {
       const convertDests = this.state.maps[k]
       for (let [destName, conflicts] of convertDests) {
-        console.log(destName)
+        // console.log(destName)
         result.push(
           <div>
             <h3>{k}</h3>

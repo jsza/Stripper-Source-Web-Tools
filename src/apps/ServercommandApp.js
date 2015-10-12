@@ -10,34 +10,39 @@ import BSPDropzone from '../components/bsp/BSPDropzone'
 export default class ServercommandApp extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {maps: null}
+    this.state = {maps: null, errors: null}
   }
 
 
   onClickReset(e) {
     e.preventDefault()
-    this.setState({maps: null})
+    this.setState({maps: null, errors: null})
   }
 
 
   handleFiles(files) {
     let maps = {}
+    let errors = {}
     let ds = []
 
-    function foo(file) {
+    let foo = function(file) {
       return (entities) =>
         maps[file.name] = this.extractServercommands(entities)
+    }
+    foo = foo.bind(this)
+
+    function handleError(filename, error) {
+      errors[filename] = error
     }
 
     for (var i = 0; i < files.length; i++) {
       const file = files[i]
-      ds.push(readEntities(file)
-        .then(foo(file)).catch(() => null)
+      ds.push(readEntities(file).catch((e) => handleError(file.name, e))
+        .then(foo(file)).catch((e) => handleError(file.name, e))
       )
     }
 
-    Promise.all(ds).then(() => this.setState({maps: maps})
-    )
+    Promise.all(ds).then(() => this.setState({maps: maps, errors: errors}))
   }
 
 
@@ -132,6 +137,30 @@ export default class ServercommandApp extends React.Component {
   }
 
 
+  renderErrors() {
+    if (!this.state.errors || Object.keys(this.state.errors).length === 0) {
+      return null
+    }
+
+    const keys = _.keys(this.state.errors).sort()
+    const errors = keys.map((k) => {
+      const error = this.state.errors[k].toString()
+      return (
+        <Panel header={<strong>{k}</strong>} bsStyle="danger" collapsable={false}>
+          {error}
+        </Panel>
+      )
+    })
+
+    return (
+      <div>
+        <h4>Errors</h4>
+        {errors}
+      </div>
+    )
+  }
+
+
   render() {
     let content
     if (this.state.maps !== null) {
@@ -147,6 +176,7 @@ export default class ServercommandApp extends React.Component {
       <div>
         <h2>point_servercommand checker <button className="btn btn-link" onClick={this.onClickReset.bind(this)}>reset</button></h2>
         {content}
+        {this.renderErrors()}
       </div>
     )
   }

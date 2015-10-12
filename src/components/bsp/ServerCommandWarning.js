@@ -11,8 +11,7 @@ export default class ServerCommandWarning extends React.Component {
 
   render() {
     if (this.props.classnameTally) {
-      for (let cn in this.props.classnameTally) {
-        const cnt = this.props.classnameTally[cn]
+      for (let [cn, cnt] of this.props.classnameTally) {
         if (cn === 'point_servercommand') {
           return (
             <pre className="no-margin" style={{marginTop: '10px'}}>

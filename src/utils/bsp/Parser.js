@@ -57,12 +57,16 @@ export function getEntityInputs(entity, entities) {
   if (entity.kv.targetname) {
     for (let e of entities) {
       e.outputs.forEach((output) => {
+        if (output.parameters.includes('sv_airaccelerate')) {
+
+          console.log(`${output.trigger} ${output.parameters}`)
+        }
         if (output.target === entity.kv.targetname) {
           inputs.push({e: e, o: output})
         }
-        if (output.target.toLowerCase().trim() === entity.kv.classname) {
-          console.log(output)
-        }
+        // if (output.target.toLowerCase().trim() === entity.kv.classname) {
+        //   console.log(output)
+        // }
       })
     }
   }
